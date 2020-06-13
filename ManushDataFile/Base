@@ -1,0 +1,55 @@
+import xlrd
+import  os
+import xlsxwriter
+
+outputfile = r'D:\Deepak\python\Project\Practice\ManushDataFile\Output\hello.xlsx'
+inputdirectory= r'D:\Deepak\python\Project\Practice\ManushDataFile\Input'
+input_files = [f for f in os.listdir(inputdirectory) if f.endswith('.xlsx')]
+print(input_files)
+if os._exists(outputfile):
+    os.remove(outputfile)
+workbookoutput = xlsxwriter.Workbook(outputfile)
+
+required_data = []
+CallOpenOI = {}
+CallChangeOpenOI = {}
+PutOpenOI = {}
+PutChangeOpenOI = {}
+
+def Create_dictionary(rowlist,key,value):
+    currentdict = {}
+    for rownum in range(rowlist):
+        if rownum > 2 and "<-Total" not in sh.row_values(rownum):
+            row_values = sh.row_values(rownum)
+            #print(row_values)
+            currentdict[float(row_values[key])] = float(row_values[value])
+    return currentdict
+
+def sort_dictionary(currentdictionary):
+    return sorted(currentdictionary.items(), key=lambda x: x[1], reverse=True)
+
+for files in input_files:
+    workbook = xlrd.open_workbook( os.path.join(inputdirectory,files))
+    sheet_name = files.split('_')[1]
+    sh = workbook.sheet_by_name(sheet_name)
+    print(sh.get_rows())
+    print(sheet_name)
+    rows = sh.nrows
+    CallOpenOI = Create_dictionary(rows, 11, 1)
+    CallChangeOpenOI = Create_dictionary(rows, 11, 2)
+    PutOpenOI = Create_dictionary(rows, 11, 21)
+    PutChangeOpenOI = Create_dictionary(rows, 11, 20)
+    workshetoutput = workbookoutput.add_worksheet(sheet_name)
+    workshetoutput.write('A1', 'Hello..')
+workbookoutput.close()
+CallOpenOI_sort = sort_dictionary(CallOpenOI)
+CallChangeOpenOI_sort = sort_dictionary(CallChangeOpenOI)
+PutOpenOI_sort = sort_dictionary(PutOpenOI)
+PutChangeOpenOI_sort = sort_dictionary(PutChangeOpenOI)
+
+# remvove unwanted rows
+# Create dictionary for
+# strike price, Open OI - Call
+# strike price, change in open OI - call
+# strike price, Open OI - put
+# strike price, change in open OI - put
