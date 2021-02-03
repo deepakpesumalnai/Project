@@ -14,6 +14,7 @@ GetFruits = {
         "http://bugtracker.example.com/issues/1235"
     ]
 }
+
 @lcc.disabled()
 @lcc.suite("GET all fruityvice fruits")
 class GetFruits:
