@@ -3,21 +3,21 @@ class Person:
     age = 10
 
     def greet(self):
-        print('Hello')
+        print('Parent')
 
 
 # Output: 10
-print(Person.age)
+#print(Person.age)
 
 # Output: <function Person.greet>
-print(Person.greet)
+#print(Person.greet)
 
 # Output: 'This is my second class'
-print(Person.__doc__)
+#print(Person.__doc__)
 
 
-harry = Person()
+#harry = Person()
 
-print(harry.__doc__)
-print(harry.age)
-print(harry.greet)
+#print(harry.__doc__)
+#print(harry.age)
+#print(harry.greet)
