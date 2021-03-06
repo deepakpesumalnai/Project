@@ -14,6 +14,7 @@ print('Append ', Samplelist.append(45))
 print(Samplelist)
 print('Remove - Remove based on value ', Samplelist.remove(2))
 print(Samplelist)
+
 newlist = Samplelist
 
 print('Appen other list', newlist.append('a'))
